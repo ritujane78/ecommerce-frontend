@@ -28,7 +28,7 @@ export class ProductListComponent {
     }else{
       this.currentCategoryId=1;
     }
-    console.log(this.currentCategoryId);
+    
 
     this.produtService.getProductList(this.currentCategoryId).subscribe(
       data => {
