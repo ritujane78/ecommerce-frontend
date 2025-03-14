@@ -58,11 +58,11 @@ export class ProductListComponent {
     if(this.previousCategoryId !== this.currentCategoryId){
       this.thePageNumber=1;
     }
-    this.produtService.getProductList(this.currentCategoryId).subscribe(
-      data => {
-      this.products = data;
-      }
-    )
+    // this.produtService.getProductList(this.currentCategoryId).subscribe(
+    //   data => {
+    //   this.products = data;
+    //   }
+    // )
 
     this.produtService.getProductListPaginate(this.thePageNumber-1,
                                               this.thePageSize,
