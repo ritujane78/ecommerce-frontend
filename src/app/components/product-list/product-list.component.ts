@@ -16,9 +16,9 @@ export class ProductListComponent {
 
   // For pagination
   thePageNumber: number = 1;
-  thePageSize: number=10;
-  theTotalElements: number=1;
-  previousCategoryId: number=1
+  thePageSize: number= 10;
+  theTotalElements: number=0;
+  previousCategoryId: number=1;
 
   constructor(private produtService: ProductService,
               private route: ActivatedRoute
@@ -55,24 +55,23 @@ export class ProductListComponent {
       this.currentCategoryId=1;
     }
     
-    if(this.previousCategoryId !== this.currentCategoryId){
+    if(this.previousCategoryId != this.currentCategoryId){
       this.thePageNumber=1;
     }
-    // this.produtService.getProductList(this.currentCategoryId).subscribe(
-    //   data => {
-    //   this.products = data;
-    //   }
-    // )
+    this.previousCategoryId = this.currentCategoryId;
+
+    console.log(`the page number = ${this.thePageNumber}`);
+
 
     this.produtService.getProductListPaginate(this.thePageNumber-1,
                                               this.thePageSize,
                                               this.currentCategoryId).subscribe(
-                                              data => {
-                                              this.products = data._embedded.products,
-                                              this.thePageNumber= data.page.number+1,
-                                              this.thePageSize= data.page.size,
-                                              this.theTotalElements = data.page.totalElements;
-                                              }
+                                                data => {
+                                                  this.products = data._embedded.products,
+                                                  this.thePageNumber= data.page.number+1,
+                                                  this.thePageSize= data.page.size,
+                                                  this.theTotalElements = data.page.totalElements;
+                                                }
                                             );
   
   }

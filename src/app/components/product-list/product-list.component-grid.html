@@ -25,23 +25,12 @@
                     No products found.
                 </div>
             </div>
-            <div class="footer-pagination">
-                <div class="row">
-                    <div class="col-md-6">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-9" style="padding-left: 30%">
-                                <ngb-pagination [(page)]="thePageNumber"
-                                                [pageSize]="thePageSize"
-                                                [collectionSize]="theTotalElements"
-                                                (pageChange)="listProducts()" >
-                                </ngb-pagination>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+            <div class="footer-pagination d-flex justify-content-center mt-4">
+                <ngb-pagination class="ngb-pagination" [(page)]="thePageNumber"
+                                [pageSize]="thePageSize"
+                                [collectionSize]="theTotalElements"
+                                (pageChange)="listProducts()" >
+                </ngb-pagination>
             </div>
         </div>
     </div>
