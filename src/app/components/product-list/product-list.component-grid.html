@@ -25,12 +25,27 @@
                     No products found.
                 </div>
             </div>
-            <div class="footer-pagination d-flex justify-content-center mt-4">
-                <ngb-pagination class="ngb-pagination" [(page)]="thePageNumber"
+            <div class="footer-pagination d-flex justify-content-center align-items-center">
+                <ngb-pagination class="ngb-pagination" 
+                                [(page)]="thePageNumber"
                                 [pageSize]="thePageSize"
                                 [collectionSize]="theTotalElements"
+                                [rotate]="true"
                                 (pageChange)="listProducts()" >
+                                <ng-template #ellipsis>
+                                    <span class="sr-only"></span>
+                                  </ng-template>
                 </ngb-pagination>
+                <div class="page-size-selector d-flex">
+                    <span class="mr-2">Page Size</span>
+                    
+                    <select #myPageSelect (change)="updatePageSize(myPageSelect.value)" class="form-control">
+                        <option selected="true">5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>

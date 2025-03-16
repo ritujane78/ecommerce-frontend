@@ -792,30 +792,48 @@ footer ul li{
     font-size:14px;
     padding:10px 20px
 }
-/* Ensure pagination is centered and horizontal */
+
 .footer-pagination {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px; 
     width: 100%;
     margin-top: 20px;
 }
 
-/* Ensure pagination items align properly */
+.page-size-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+}
+
+.page-size-selector select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+.ngb-pagination .page-item.active .page-link .visually-hidden {
+    display: none;
+}
+
+
+
 .ngb-pagination {
     display: flex !important;
     justify-content: center;
     align-items: center;
-    gap: 8px; /* Space between items */
+    gap: 8px;
     padding: 10px 0;
 }
 
-/* Make pagination items appear in a row */
+
 .ngb-pagination .page-item {
-    display: inline-block; /* Ensures they are in a row */
+    display: inline-block; 
 }
 
-/* Style pagination links */
+
 .ngb-pagination .page-item .page-link {
     border-radius: 5px;
     padding: 10px 15px;
@@ -826,20 +844,20 @@ footer ul li{
     transition: all 0.3s ease-in-out;
 }
 
-/* Active page styling */
+
 .ngb-pagination .page-item.active .page-link {
     background-color: #0da8e4;
     color: white;
     border-color: #0da8e4;
 }
 
-/* Hover effect */
+
 .ngb-pagination .page-item .page-link:hover {
     background-color: #0da8e4;
     color: white;
 }
 
-/* Disabled pagination buttons */
+
 .ngb-pagination .page-item.disabled .page-link {
     color: #ccc;
     border-color: #ddd;
