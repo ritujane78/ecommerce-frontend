@@ -31,6 +31,8 @@
                                 [pageSize]="thePageSize"
                                 [collectionSize]="theTotalElements"
                                 [rotate]="true"
+                                [maxSize]="3"
+                                [boundaryLinks]="true"
                                 (pageChange)="listProducts()" >
                                 <ng-template #ellipsis>
                                     <span class="sr-only"></span>
@@ -40,7 +42,8 @@
                     <span class="mr-2">Page Size</span>
                     
                     <select #myPageSelect (change)="updatePageSize(myPageSelect.value)" class="form-control">
-                        <option selected="true">5</option>
+                        <option selected="true">2</option>
+                        <option>5</option>
                         <option>10</option>
                         <option>20</option>
                         <option>50</option>
