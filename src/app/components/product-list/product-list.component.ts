@@ -16,7 +16,7 @@ export class ProductListComponent {
 
   // For pagination
   thePageNumber: number = 1;
-  thePageSize: number= 2;
+  thePageSize: number= 5;
   theTotalElements: number=0;
   previousCategoryId: number=1;
 
@@ -90,5 +90,8 @@ export class ProductListComponent {
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
     }
+  }
+  addToCart(theProduct: Product){
+    console.log(`Product Detail: ${theProduct.name}, and Price = ${theProduct.unitPrice}`);
   }
 }

@@ -15,7 +15,7 @@
                             <h1>{{tempProduct.name}}</h1>
                         </a>
                         <div class="price">{{tempProduct.unitPrice | currency:' USD'}}</div>
-                        <a href="#" class="primary-btn">Add to Cart</a>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to Cart</button>
                     </div>
 
                  </div>
@@ -25,29 +25,39 @@
                     No products found.
                 </div>
             </div>
-            <div class="footer-pagination d-flex justify-content-center align-items-center">
-                <ngb-pagination class="ngb-pagination" 
-                                [(page)]="thePageNumber"
-                                [pageSize]="thePageSize"
-                                [collectionSize]="theTotalElements"
-                                [rotate]="true"
-                                [maxSize]="3"
-                                [boundaryLinks]="true"
-                                (pageChange)="listProducts()" >
-                                <ng-template #ellipsis>
-                                    <span class="sr-only"></span>
-                                  </ng-template>
-                </ngb-pagination>
-                <div class="page-size-selector d-flex">
-                    <span class="mr-2">Page Size</span>
-                    
-                    <select #myPageSelect (change)="updatePageSize(myPageSelect.value)" class="form-control">
-                        <option selected="true">2</option>
-                        <option>5</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>50</option>
-                    </select>
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-6"></div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-9" style="padding-left: 30%">
+                            
+                                <ngb-pagination [(page)]="thePageNumber"
+                                                [pageSize]="thePageSize"
+                                                [collectionSize]="theTotalElements"
+                                                [maxSize]="5"
+                                                (pageChange)="listProducts()">
+
+                                </ngb-pagination>
+
+                            </div>
+
+                            <div class="col-md-3 mt-2" style="text-align: right;">
+                                <span class="mr-2">Page Size</span>
+
+                                <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                                    <option>2</option>
+                                    <option selected="true">5</option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>50</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
