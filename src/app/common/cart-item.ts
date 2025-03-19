@@ -4,6 +4,7 @@ export class CartItem {
     id: string;
     name:string;
     unitPrice: number;
+    imageUrl: string;
 
     quantity: number = 1;
 
@@ -11,5 +12,6 @@ export class CartItem {
         this.id = product.id;
         this.name = product.name;
         this.unitPrice = product.unitPrice;
+        this.imageUrl = product.imageUrl;
     }
 }
