@@ -69,6 +69,24 @@ export class CheckoutComponent {
       this.checkoutFormGroup.get('billingAddress')?.reset();
     }
   }
+  handleMonthsAndYears(){
+    let formCreditCardGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(formCreditCardGroup?.value.expirationYear);
+
+    // console.log(currentYear, selectedYear);
+
+    let startMonth : number = 0;
+    if(currentYear === selectedYear){
+      startMonth = new Date().getMonth() + 1;
+    } else {
+      startMonth = 1;
+    }
+    this.luv2ShopFormService.creditCardMonths(startMonth).subscribe(
+      data => this.creditCardMonths = data
+    )
+  }
 
   onSubmit(){
       console.log(this.checkoutFormGroup.get('customer')?.value);

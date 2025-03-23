@@ -154,7 +154,7 @@
             <div class="col-md-2"><label>Name on Card</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input type="text" formControlName="street" />
+                <input type="text" formControlName="nameOfCard" />
               </div>
             </div>
           </div>
@@ -178,7 +178,7 @@
             <div class="col-md-2"><label>Expiration Month</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="expirationMonth">
+                <select formControlName="expirationMonth" >
                   <option *ngFor="let month of creditCardMonths">
                     {{month}}
                   </option>
@@ -190,7 +190,7 @@
             <div class="col-md-2"><label>Expiration Year</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="expirationYear">
+                <select formControlName="expirationYear" (change)="handleMonthsAndYears()">
                   <option *ngFor="let year of creditCardYear">
                     {{year}}
                   </option>
