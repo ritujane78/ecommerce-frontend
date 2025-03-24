@@ -74,8 +74,14 @@ export class CheckoutComponent {
     if(event.target.checked){
       this.checkoutFormGroup.get('billingAddress')?.setValue(
         this.checkoutFormGroup.get('shippingAddress')?.value)
+        
+        // Bug fix for states
+        this.billingAddressStates = this.shippingAddressStates;
     } else {
       this.checkoutFormGroup.get('billingAddress')?.reset();
+
+      // Bug fix for states
+      this.billingAddressStates = [];
     }
   }
   handleMonthsAndYears(){
