@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Luv2ShopFormService } from '../../sevices/luv2-shop-form.service';
+import { Country } from '../../common/country';
+import { State } from '../../common/state';
 
 @Component({
   selector: 'app-checkout',
@@ -14,6 +16,10 @@ export class CheckoutComponent {
   totalPrice: number = 0.0;
   creditCardMonths: number[] = [];
   creditCardYear: number[] = [];
+
+  countries: Country[] = [];
+  shippingAddressStates: State[] = [];
+  billingAddressStates: State[] = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -60,6 +66,9 @@ export class CheckoutComponent {
     this.luv2ShopFormService.getCreditCardYear().subscribe(
       data => this.creditCardYear = data
     )
+    this.luv2ShopFormService.getCountries().subscribe(
+      data => this.countries = data
+    )
   }
   copyShippingToBillingAddress(event: any){
     if(event.target.checked){
@@ -90,6 +99,25 @@ export class CheckoutComponent {
 
   onSubmit(){
       console.log(this.checkoutFormGroup.get('customer')?.value);
+  }
+
+  getStates(theGroupName: string){
+    const formGroup = this.checkoutFormGroup.get(theGroupName);
+
+    const code = formGroup?.value.country.code;
+    const name = formGroup?.value.country.name;
+
+    this.luv2ShopFormService.getStates(code).subscribe(
+      data => {
+        console.log(`${JSON.stringify(data)}`);
+        if(theGroupName === "shippingAddress"){
+          this.shippingAddressStates = data;
+        }else{
+          this.billingAddressStates = data;
+        }
+        formGroup?.get('state')?.setValue(data[0]);
+      }
+    )
   }
 
 }
