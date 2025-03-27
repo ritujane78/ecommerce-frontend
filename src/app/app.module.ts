@@ -16,6 +16,7 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Luv2ShopFormService } from './sevices/luv2-shop-form.service';
+import { CheckoutService } from './services/checkout.service';
 
 const routes: Routes = [
   {path: "checkout", component: CheckoutComponent},
@@ -50,7 +51,8 @@ const routes: Routes = [
   ],
   providers: [provideHttpClient(),
     ProductService,
-    Luv2ShopFormService
+    Luv2ShopFormService,
+    CheckoutService
   ],
   bootstrap: [AppComponent]
 })
