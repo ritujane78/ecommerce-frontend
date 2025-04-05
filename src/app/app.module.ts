@@ -18,8 +18,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Luv2ShopFormService } from './sevices/luv2-shop-form.service';
 import { CheckoutService } from './services/checkout.service';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { OrderHistoryButtonComponent } from './components/order-history-button/order-history-button.component';
 
 const routes: Routes = [
+  {path: "order-history", component: OrderHistoryComponent},
   {path: "checkout", component: CheckoutComponent},
   {path: "cart-details", component: CartDetailsComponent},
   {path: "products/:id", component: ProductDetailsComponent},
@@ -41,7 +43,8 @@ const routes: Routes = [
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    OrderHistoryButtonComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
