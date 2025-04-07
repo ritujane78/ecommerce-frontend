@@ -19,8 +19,26 @@ import { Luv2ShopFormService } from './sevices/luv2-shop-form.service';
 import { CheckoutService } from './services/checkout.service';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderHistoryButtonComponent } from './components/order-history-button/order-history-button.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
+
+import {
+  OktaAuthModule,
+  OktaCallbackComponent,
+  OKTA_CONFIG
+} from '@okta/okta-angular';
+
+import {OktaAuth} from '@okta/okta-auth-js';
+
+const oktaAuth = new OktaAuth({
+  clientId: '0oao6058s3l7B7Wwh5d7',
+  issuer: 'https://dev-55924850.okta.com/oauth2/default',
+  redirectUri: 'http://localhost:4200/login/callback'
+});
 
 const routes: Routes = [
+  {path: "login/callback", component: OktaCallbackComponent},
+  {path: "login", component: LoginComponent},
   {path: "order-history", component: OrderHistoryComponent},
   {path: "checkout", component: CheckoutComponent},
   {path: "cart-details", component: CartDetailsComponent},
@@ -44,15 +62,16 @@ const routes: Routes = [
     CartDetailsComponent,
     CheckoutComponent,
     OrderHistoryComponent,
-    OrderHistoryButtonComponent
+    OrderHistoryButtonComponent,
+    LoginStatusComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    OktaAuthModule.forRoot({ oktaAuth }),
   ],
   providers: [provideHttpClient(),
     ProductService,
