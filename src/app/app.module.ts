@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { provideHttpClient } from '@angular/common/http';
 import { ProductService } from './services/product.service';
-import { Routes,RouterModule } from '@angular/router';
+import { Routes,RouterModule, Router } from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -25,10 +25,13 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 import {
   OktaAuthModule,
   OktaCallbackComponent,
-  OKTA_CONFIG
+  OKTA_CONFIG,
+  OktaAuthGuard
 } from '@okta/okta-angular';
 
 import {OktaAuth} from '@okta/okta-auth-js';
+import { MembersPageComponent } from './components/members-page/members-page.component';
+
 
 const oktaAuth = new OktaAuth({
   clientId: '0oao6058s3l7B7Wwh5d7',
@@ -36,9 +39,19 @@ const oktaAuth = new OktaAuth({
   redirectUri: 'http://localhost:4200/login/callback'
 });
 
+function sendToLoginPage(oktaAuth: InstanceType<typeof OktaAuth>,injector: Injector ){
+  const router = injector.get(Router);
+
+  router.navigate(["/login"]);
+
+}
+
 const routes: Routes = [
   {path: "login/callback", component: OktaCallbackComponent},
   {path: "login", component: LoginComponent},
+  {path: "members", component: MembersPageComponent, canActivate: [OktaAuthGuard],
+                    data: {onAuthRequired: sendToLoginPage}
+  },
   {path: "order-history", component: OrderHistoryComponent},
   {path: "checkout", component: CheckoutComponent},
   {path: "cart-details", component: CartDetailsComponent},
@@ -63,7 +76,8 @@ const routes: Routes = [
     CheckoutComponent,
     OrderHistoryComponent,
     OrderHistoryButtonComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    MembersPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
