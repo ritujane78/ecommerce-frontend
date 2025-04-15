@@ -11,6 +11,7 @@ import { OrderHistoryService } from '../../sevices/order-history.service';
 export class OrderHistoryComponent {
 
   orderHistoryList: OrderHistory[] = [];
+  storage:Storage = localStorage;
 
   constructor(private orderHistoryService: OrderHistoryService){}
 
@@ -18,7 +19,8 @@ export class OrderHistoryComponent {
     this.handleOrderHistory();
   }
   handleOrderHistory() {
-    const theEmail = "ritu.bafna@test.com";
+
+    const theEmail = JSON.parse(this.storage.getItem('userEmail')!);
 
     this.orderHistoryService.getOrderHistory(theEmail).subscribe(
       data => {

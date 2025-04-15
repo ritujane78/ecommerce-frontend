@@ -12,6 +12,8 @@ export class LoginStatusComponent {
   isAuthenticated: boolean= false;
   userFullName: string = '';
 
+  storage: Storage = localStorage;
+
   constructor(private oktaAuthService: OktaAuthStateService,
               @Inject(OKTA_AUTH) private oktaAuth: InstanceType<typeof OktaAuth>
   ){
@@ -31,11 +33,15 @@ export class LoginStatusComponent {
     if (this.isAuthenticated) {
       this.oktaAuth.getUser().then((result: any) => {
         this.userFullName = result.name as string;
+
+        const theEmail = result.email;
+
+        this.storage.setItem('userEmail', JSON.stringify(theEmail));
       });
     }
   }
 
   logout(){
-    this.oktaAuth.signout();
+    this.oktaAuth.signOut();
   }
 }

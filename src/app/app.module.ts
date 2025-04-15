@@ -52,7 +52,7 @@ const routes: Routes = [
   {path: "members", component: MembersPageComponent, canActivate: [OktaAuthGuard],
                     data: {onAuthRequired: sendToLoginPage}
   },
-  {path: "order-history", component: OrderHistoryComponent},
+  {path: "order-history", component: OrderHistoryComponent, canActivate: [OktaAuthGuard], data: {onAuthRequired: sendToLoginPage}},
   {path: "checkout", component: CheckoutComponent},
   {path: "cart-details", component: CartDetailsComponent},
   {path: "products/:id", component: ProductDetailsComponent},
