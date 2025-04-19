@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { Routes,RouterModule, Router } from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
@@ -31,6 +31,7 @@ import {
 
 import {OktaAuth} from '@okta/okta-auth-js';
 import { MembersPageComponent } from './components/members-page/members-page.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 
 const oktaAuth = new OktaAuth({
@@ -85,12 +86,14 @@ const routes: Routes = [
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    HttpClientModule,
     OktaAuthModule.forRoot({ oktaAuth }),
   ],
-  providers: [provideHttpClient(),
+  providers: [
     ProductService,
     Luv2ShopFormService,
-    CheckoutService
+    CheckoutService, 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
