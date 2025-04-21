@@ -15,7 +15,7 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Luv2ShopFormService } from './sevices/luv2-shop-form.service';
+import { Luv2ShopFormService } from './services/luv2-shop-form.service';
 import { CheckoutService } from './services/checkout.service';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderHistoryButtonComponent } from './components/order-history-button/order-history-button.component';
@@ -37,7 +37,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 const oktaAuth = new OktaAuth({
   clientId: '0oao6058s3l7B7Wwh5d7',
   issuer: 'https://dev-55924850.okta.com/oauth2/default',
-  redirectUri: 'http://localhost:4200/login/callback'
+  redirectUri: 'https://localhost:4200/login/callback'
 });
 
 function sendToLoginPage(oktaAuth: InstanceType<typeof OktaAuth>,injector: Injector ){
