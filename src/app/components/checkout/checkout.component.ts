@@ -229,7 +229,7 @@ export class CheckoutComponent {
         }
       )
     */
-      this.paymentInfo.amount = this.totalPrice * 100;
+      this.paymentInfo.amount = Math.round(this.totalPrice * 100);
       this.paymentInfo.currency = "USD"; 
 
       if(!this.checkoutFormGroup.invalid && this.displayError.textContent == ""){
@@ -276,7 +276,6 @@ export class CheckoutComponent {
   }
 
   getStates(theGroupName: string){
-    console.log("heree");
     const formGroup = this.checkoutFormGroup.get(theGroupName);
 
     const code = formGroup?.value.country.code;
