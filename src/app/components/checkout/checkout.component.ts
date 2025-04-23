@@ -52,7 +52,7 @@ export class CheckoutComponent {
     
     this.reviewCartDetails();
 
-    const theEmail = "ritu.bafna@test.com";
+    const theEmail = "rbafna.official@gmail.com";
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({  
@@ -268,9 +268,9 @@ export class CheckoutComponent {
 
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
+    this.cartService.persistItems();
 
     this.checkoutFormGroup.reset();
-    localStorage.clear();
 
     this.router.navigateByUrl('/products');
   }
