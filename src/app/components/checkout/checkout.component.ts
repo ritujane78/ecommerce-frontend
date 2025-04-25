@@ -37,6 +37,7 @@ export class CheckoutComponent {
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
   displayError: any= "";
+  isDisabled: boolean= false;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -233,6 +234,7 @@ export class CheckoutComponent {
       this.paymentInfo.currency = "USD"; 
 
       if(!this.checkoutFormGroup.invalid && this.displayError.textContent == ""){
+        this.isDisabled = true;
         this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
           (paymentIntentResponse) => {
             this.stripe.confirmCardPayment(paymentIntentResponse.client_secret, 
@@ -255,14 +257,17 @@ export class CheckoutComponent {
               .then((result: any) => {
                 if(result.error){
                   alert(`There was an error: ${result.error.messaage}`);
+                  this.isDisabled = false;
                 }else {
                   this.checkoutService.placeOrder(purchase).subscribe({
                     next: ( response:any) => {
                       alert(`Your order has been received. \n Order tracking Number: ${response.orderTrackingNumber}`);
                       this.resetCart();
+                      this.isDisabled = false;
                     },
                     error: (error: any) => {
                       alert(`There was an error: ${error.messaage}`);
+                      this.isDisabled = false;
                     }
                   })
                 }
